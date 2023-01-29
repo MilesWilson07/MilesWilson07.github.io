@@ -107,7 +107,7 @@ function loop() {
     {
       player1Score++;
     }
-    context.fillText("The score is " + player1Score +" to " + player2Score, 500, 100);
+    //context.fillText("The score is " + player1Score +" to " + player2Score, 500, 100);
     ball.resetting = true;
 
     // give some time for the player to recover before launching the ball again
