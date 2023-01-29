@@ -109,6 +109,8 @@ function loop() {
     {
       player1Score++;
     }
+    console.log("here");
+    console.log(player1Score);
     document.getElementById('scoreboard').innerHTML="Player 1: " + player1Score + "                       Player 2: " + player2Score;
     ball.resetting = true;
 
