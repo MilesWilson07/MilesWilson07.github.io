@@ -9,6 +9,7 @@ var paddleSpeed = 6;
 var ballSpeed = 5;
 var player1Score=0;
 var player2Score=0;
+context.fillText("The score is " + player1Score +" to " + player2Score, 500, 100);
 
 const leftPaddle = {
   // start in the middle of the game on the left side
@@ -107,7 +108,7 @@ function loop() {
     {
       player1Score++;
     }
-    context.fillText("The score is " + player1Score +" to " + player2Score, 500, 100);
+    
     ball.resetting = true;
 
     // give some time for the player to recover before launching the ball again
