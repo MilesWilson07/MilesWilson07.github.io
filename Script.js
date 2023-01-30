@@ -111,7 +111,7 @@ function loop() {
     }
     console.log("here");
     console.log(player1Score);
-    document.getElementById('scoreboard').innerHTML="Player 1: " + player1Score + "                         Player 2: " + player2Score;
+    document.getElementById('scoreboard').innerHTML="Player 1: " + player1Score + "      " + "                         Player 2: " + player2Score;
     ball.resetting = true;
 
     // give some time for the player to recover before launching the ball again
