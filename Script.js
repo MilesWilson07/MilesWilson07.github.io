@@ -5,8 +5,8 @@ const grid = 15;
 const paddleHeight = grid * 5; // 80
 const maxPaddleY = canvas.height - grid - paddleHeight;
 
-var paddleSpeed = 6;
-var ballSpeed = 5;
+var paddleSpeed = 3;
+var ballSpeed = 2.5;
 var player1Score=0;
 var player2Score=0;
 context.fillText("The score is " + player1Score +" to " + player2Score, 500, 100);
@@ -56,6 +56,17 @@ function collides(obj1, obj2) {
          obj1.y + obj1.height > obj2.y;
 }
 
+function gameOver() {
+	var modal = document.getElementById("overModal");
+	modal.style.display = "block";
+	var button = document.getElementById("startBtn");
+}
+
+function startOver () {
+	location.reload();
+}
+
+
 // game loop
 function loop() {
   requestAnimationFrame(loop);
@@ -89,6 +100,16 @@ function loop() {
   ball.x += ball.dx;
   ball.y += ball.dy;
 
+  // move left paddle based on velocity of ball
+  if (ball.dy < 0) {
+    leftPaddle.dy = -paddleSpeed * .88;
+  }
+  else if (ball.dy > 0) {
+    leftPaddle.dy = paddleSpeed *.88;
+  }
+
+
+
   // prevent ball from going through walls by changing its velocity
   if (ball.y < grid) {
     ball.y = grid;
@@ -113,6 +134,14 @@ function loop() {
     console.log(player1Score);
     document.getElementById('scoreboard').innerHTML="Player 1: " + player1Score + "      " + "                         Player 2: " + player2Score;
     ball.resetting = true;
+
+// stop if score past 7
+if (player2Score >= 7 || player1Score >= 7) {
+	ball.dy = 0;
+	leftPaddle.dy = 0;
+	rightPaddle.dy = 0;
+	return gameOver();
+}
 
     // give some time for the player to recover before launching the ball again
     setTimeout(() => {
@@ -164,14 +193,6 @@ document.addEventListener('keydown', function(e) {
     rightPaddle.dy = paddleSpeed;
   }
 
-  // w key
-  if (e.which === 87) {
-    leftPaddle.dy = -paddleSpeed;
-  }
-  // a key
-  else if (e.which === 83) {
-    leftPaddle.dy = paddleSpeed;
-  }
 });
 
 // listen to keyboard events to stop the paddle if key is released
